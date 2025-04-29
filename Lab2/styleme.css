@@ -1,0 +1,32 @@
+* {
+    color: #05445e;
+    font-family: Tahoma;
+}
+
+body {
+    background-color: #d4f1f4;
+}
+
+h1{
+    font-family: 'Arial Black';
+}
+
+a {
+    color: #189AB4;
+}
+
+h3 {
+    color: #75E6DA;
+}
+
+img{
+    max-width: 200px;
+}
+
+i{
+    font-weight: bold;
+}
+
+.validator{
+    max-width: 80px;
+}
