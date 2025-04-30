@@ -30,6 +30,5 @@ export function delete_item_by_id(id) {
 export function get_item_title_by_id(id) {
     // return the item title by id (if id exist)
     let findItem = data.find((item) => item.id === id);
-    if (findItem) return findItem.title;
-    return null;
+    return findItem ? findItem.title : null;
 }
