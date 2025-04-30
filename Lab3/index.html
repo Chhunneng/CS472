@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab3 - Problem 1</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./prob1.js" defer></script>
+    <script src="./prob2.js" defer></script>
+    <script src="./prob3.js" defer></script>
+    <script src="./script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>💻 Lab 3: JavaScript Functional Practice</h1>
+    </header>
+
+    <main>
+        <section class="question">
+            <h2>Problem 1: Functional JavaScript</h2>
+            <pre>
+a) Write a function named <code>computeSumOfSquares</code> that takes an array of numbers and returns the 
+   sum of the squares using functional programming (no loops).
+
+b) Write a function named <code>printOddNumbersOnly</code> that prints only the odd numbers from an array.
+
+c) Write a function named <code>printFibo</code> that prints the first n numbers in a Fibonacci sequence 
+   starting with two given numbers.
+      </pre>
+        </section>
+
+        <section class="code">
+            <h2>Solution</h2>
+            <pre><code>
+"use strict";
+
+function computeSumOfSquares(arr) {
+    return arr.reduce((total, item) => total + item * item, 0);
+}
+                
+console.log(computeSumOfSquares([1, 2, 3]));
+                
+let printOddNumbersOnly = function (arr) {
+    arr.filter((n) => n & 1).forEach((n) => console.log(n));
+};
+                
+printOddNumbersOnly([1, 2, 3, 4, 5, 6]);
+                
+let printFibo = (n, a, b) => {
+    let ans = [];
+    while (n-- > 0) {
+        ans.push(a);
+        b = b + a;
+        a = b - a;
+    }
+    console.log(ans.join(", "));
+};
+                
+printFibo(10, 0, 1);
+                
+      </code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Problem 2: Destructuring Assignment</h2>
+            <pre>
+Destructuring assignment:
+Read the following properties from the object into separate variables:
+- <code>name</code> into variable <code>name</code>
+- <code>years</code> into variable <code>age</code>
+- <code>isAdmin</code> into variable <code>isAdmin</code> (default to false if missing)
+  
+Example:
+let user = { name: "John", years: 30 };
+Result:
+name = "John", age = 30, isAdmin = false
+        </pre>
+        </section>
+
+        <section class="code">
+            <h2>Solution - Problem 2</h2>
+            <pre><code>
+let user = { name: "John", years: 30 };
+let { name, years: age, isAdmin = false } = user;
+  
+alert(name);    // John
+alert(age);     // 30
+alert(isAdmin); // false
+        </code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Problem 3: Library Book Manager</h2>
+            <pre>
+Array and its methods, and Object literal assignment:
+          
+let libraryBooks = [
+  { title: "The Road Ahead", author: "Bill Gates", ID: 1235 },
+  { title: "Walter Isaacson", author: "Steve Jobs", ID: 4268 },
+  { title: "The Road Ahead", author: "Bill Gates", ID: 4268 },
+  { title: "Mockingjay: The Final Book of The Hunger Games", author: "Suzanne Collins", ID: 3257 }
+];
+          
+Functions to implement:
+- <code>addBook</code>: Add a book to the library if it doesn't already exist.
+- <code>getTitles</code>: Return all titles sorted alphabetically.
+- <code>findBooks</code>: Find books with a keyword in the title, sorted by ID.
+            </pre>
+        </section>
+
+        <section class="code">
+            <h2>Solution - Problem 3</h2>
+            <pre><code>
+let libraryBooks = [
+  { title: "The Road Ahead", author: "Bill Gates", ID: 1235 },
+  { title: "Walter Isaacson", author: "Steve Jobs", ID: 4268 },
+  { title: "The Road Ahead", author: "Bill Gates", ID: 4268 },
+  { title: "Mockingjay: The Final Book of The Hunger Games", author: "Suzanne Collins", ID: 3257 }
+];
+          
+function addBook(title, author, ID) {
+  let found = libraryBooks.find((book) => book.title === title);
+  if (found) return found;
+  let newBook = { title, author, ID };
+  libraryBooks.push(newBook);
+  return newBook;
+}
+          
+function getTitles() {
+  return libraryBooks.map(book => book.title).sort();
+}
+          
+function findBooks(title) {
+  return libraryBooks
+    .filter(book => book.title.includes(title))
+    .sort((a, b) => a.ID - b.ID);
+}
+  </code></pre>
+        </section>
+
+
+        <!-- Problem 4 -->
+        <section class="question">
+            <h2>Problem 4: CRUD Functions with Data Array</h2>
+            <pre>
+Implement following functions in data.js:
+- get_items()
+- add_item(new_item)
+- update_item_title_by_id(id, new_title)
+- delete_item_by_id(id)
+- get_item_title_by_id(id)
+  
+Test these in script.js.
+    </pre>
+        </section>
+
+        <section class="code">
+            <h2>Solution - Problem 4 (data.js)</h2>
+            <pre><code>
+let data = [];
+  
+export function get_items() {
+    return data;
+}
+  
+export function add_item(new_item) {
+    let findItem = data.find(item => item.id === new_item.id);
+    if (findItem) return false;
+    data.push(new_item);
+    return true;
+}
+  
+export function update_item_title_by_id(id, new_title) {
+    let findItem = data.find(item => item.id === id);
+    if (!findItem) return false;
+    findItem.title = new_title;
+    return true;
+}
+  
+export function delete_item_by_id(id) {
+    let index = data.findIndex(item => item.id === id);
+    if (index === -1) return false;
+    data.splice(index, 1);
+    return true;
+}
+  
+export function get_item_title_by_id(id) {
+    let findItem = data.find(item => item.id === id);
+    return findItem ? findItem.title : null;
+}
+    </code></pre>
+        </section>
+
+        <section class="code">
+            <h2>Test - script.js</h2>
+            <pre><code>
+import {
+  get_items,
+  add_item,
+  update_item_title_by_id,
+  delete_item_by_id,
+  get_item_title_by_id
+} from './data.js';
+  
+add_item({ id: 1, title: "Title1" });
+add_item({ id: 2, title: "Title2" });
+console.log("After add:", get_items());
+  
+update_item_title_by_id(1, "Updated Title");
+console.log("After Update:", get_items());
+delete_item_by_id(2);
+  
+console.log("After Delete:", get_items());
+console.log("Get item id 1:", get_item_title_by_id(1));
+console.log("Get item id 2:", get_item_title_by_id(2));
+    </code></pre>
+        </section>
+
+    </main>
+</body>
+
+</html>
