@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab4</title>
+    <link href="../Lab3/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>💻 Lab 4: Execution Context</h1>
+    </header>
+
+    <main>
+        <section class="question">
+            <h2>Problem 1: What will be printed?</h2>
+            <a href="./prob1.js">Here is source code</a>
+            <h3>Code 1</h3>
+            <pre><code>let x;
+var a = 5;
+var b = 10;
+var c = function(a,b,c){
+    document.write(x); // undefined
+    document.write(a); // 8
+    var f = function(a, b, c){ 
+        b = a;
+        document.write(b); // 8
+        b = c;
+        var x = 5;
+    }
+    f(a, b, c);
+    document.write(b); // 9
+    var x = 10;
+}
+c(8, 9, 10);
+document.write(b); // 10
+document.write(x); // undefined</code></pre>
+            <h3>Output Code1</h3>
+            <pre><code>undefined88910undefined</code></pre>
+            <h3>Code 2</h3>
+            <pre><code>var x = 9;
+function myFunction(){
+    return x * x;
+}
+document.write(myFunction()) // 81
+x = 5;
+document.write(myFunction()) // 25</code></pre>
+            <h3>Output Code2</h3>
+            <pre><code>8125</code></pre>
+            <h3>Code 3</h3>
+            <pre><code>var foo = 1;
+function bar(){
+    if(!foo){ // foo = undefined
+        var foo = 10;
+    }
+    alert(foo); // 10
+}
+bar()</code></pre>
+            <h3>Output Code3</h3>
+            <pre><code>10</code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Problem 2: Draw the lexical environment diagram</h2>
+            <h3>Code 1</h3>
+            <pre><code>let x;
+var a = 5;
+var b = 10;
+var c = function(a,b,c){
+    document.write(x); // undefined
+    document.write(a); // 8
+    var f = function(a, b, c){ 
+        b = a;
+        document.write(b); // 8
+        b = c;
+        var x = 5;
+    }
+    f(a, b, c);
+    document.write(b); // 9
+    var x = 10;
+}
+c(8, 9, 10);
+document.write(b); // 10
+document.write(x); // undefined</code></pre>
+            <h3>Lexical Environment Diagram For Code 1</h3>
+            <pre><code>1. Global EC creation:
+Outer: null, this: document, LE: [{a: undefined, b: undefined, c: undefined}], TDZ{x}
+2. Global EC execution:
+Outer: null, this: document, LE: [{a: 5, b: 10, c: fn, x: undefined}], TDZ{}
+3. c FEC creation:
+Outer: global, this: ..., LE: [{arguments: obj, a: 8, b: 9, c: 10, f: undefined, x: undefined}], TDZ{}
+4. c FEC execution:
+Outer: global, this: ..., LE: [{arguments: obj, a: 8, b: 9, c: 10, f: fn, x: 10}], TDZ{}
+5. f FEC creation:
+Outer: c function block, this: ..., LE: [{arguments: obj, a: 8, b: 9, c: 10, x: undefined}], TDZ{}
+6. f FEC execution:
+Outer: c function block, this: ..., LE: [<s>{arguments: obj, a: 8, b: 8, c: 10, x: undefined}</s><s>{arguments: obj, a: 8, b: 10, c: 10, x: undefined}</s>{arguments: obj, a: 8, b: 10, c: 10, x: 10}], TDZ{}</code></pre>
+<h3>Code 2</h3>
+            <pre><code>var x = 9;
+function myFunction(){
+    return x * x;
+}
+document.write(myFunction()) // 81
+x = 5;
+document.write(myFunction()) // 25</code></pre>
+<h3>Lexical Environment Diagram For Code 2</h3>
+            <pre><code>1. Global EC creation:
+Outer: null, this: document, LE: [{x: undefined, myFunction: fn}], TDZ{}
+2. Global EC execution:
+Outer: null, this: document, LE: [{x: 9, myFunction: fn}], TDZ{}
+3. myFunction FEC creation:
+Outer: global, this: ..., LE: [{arguments: obj}], TDZ{}
+4. myFunction FEC execution:
+Outer: global, this: ..., LE: [{arguments: obj}], TDZ{}
+5. Global EC execution:
+Outer: null, this: document, LE: [{x: 5, myFunction: fn}], TDZ{}
+7. myFunction FEC creation:
+Outer: global, this: ..., LE: [{arguments: obj}], TDZ{}
+8. myFunction FEC execution:
+Outer: global, this: ..., LE: [{arguments: obj}], TDZ{}</code></pre>
+<h3>Code 3</h3>
+            <pre><code>var foo = 1;
+function bar(){
+    if(!foo){ // foo = undefined
+        var foo = 10;
+    }
+    alert(foo); // 10
+}
+bar()</code></pre>
+<h3>Lexical Environment Diagram For Code 3</h3>
+            <pre><code>1. Global EC creation:
+Outer: null, this: document, LE: [{foo: undefined, bar: fn}], TDZ{}
+2. Global EC execution:
+Outer: null, this: document, LE: [{foo: 1, bar: fn}], TDZ{}
+3. bar FEC creation:
+Outer: global, this: ..., LE: [{arguments: obj, foo: undefined}], TDZ{}
+4. myFunction FEC execution:
+Outer: global, this: ..., LE: [{arguments: obj}, foo: 10], TDZ{}</code></pre>
+</section>
+
+
+            <a href="https://validator.w3.org/check?url=https://chhunneng.github.io/CS472/Lab4/index.html"><img
+                    src="../imgs/w3c-html5-logo.png" class="validator" alt="W3C HTML5 Logo"></a>
+            <a
+                href="https://jigsaw.w3.org/css-validator/validator?uri=https://chhunneng.github.io/CS472/Lab4/index.html"><img
+                    src="../imgs/w3c-css-logo.png" class="validator" alt="W3C CSS Logo"></a>
+
+    </main>
+</body>
+
+</html>

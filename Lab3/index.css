@@ -25,7 +25,7 @@ section {
     box-shadow: 0 4px 6px rgba(5, 68, 94, 0.1);
 }
 
-h2 {
+h2, h3 {
     color: #189ab4;
 }
 
@@ -39,4 +39,12 @@ pre {
 code {
     color: #05445e;
     font-family: monospace;
+}
+
+a {
+    color: #05445e;
+}
+
+a:hover {
+    color: #189ab4;
 }
