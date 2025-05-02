@@ -48,3 +48,12 @@ a {
 a:hover {
     color: #189ab4;
 }
+
+.code-error {
+    background-color: #4A3635;
+    color: #F5DFDD;
+}
+
+s {
+    color: red;
+}

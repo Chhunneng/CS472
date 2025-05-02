@@ -86,9 +86,9 @@ document.write(b); // 10
 document.write(x); // undefined</code></pre>
             <h3>Lexical Environment Diagram For Code 1</h3>
             <pre><code>1. Global EC creation:
-Outer: null, this: document, LE: [{a: undefined, b: undefined, c: undefined}], TDZ{x}
+Outer: null, this: Window, LE: [{a: undefined, b: undefined, c: undefined}], TDZ{x}
 2. Global EC execution:
-Outer: null, this: document, LE: [{a: 5, b: 10, c: fn, x: undefined}], TDZ{}
+Outer: null, this: Window, LE: [{a: 5, b: 10, c: fn, x: undefined}], TDZ{}
 3. c FEC creation:
 Outer: global, this: ..., LE: [{arguments: obj, a: 8, b: 9, c: 10, f: undefined, x: undefined}], TDZ{}
 4. c FEC execution:
@@ -96,7 +96,7 @@ Outer: global, this: ..., LE: [{arguments: obj, a: 8, b: 9, c: 10, f: fn, x: 10}
 5. f FEC creation:
 Outer: c function block, this: ..., LE: [{arguments: obj, a: 8, b: 9, c: 10, x: undefined}], TDZ{}
 6. f FEC execution:
-Outer: c function block, this: ..., LE: [<s>{arguments: obj, a: 8, b: 8, c: 10, x: undefined}</s><s>{arguments: obj, a: 8, b: 10, c: 10, x: undefined}</s>{arguments: obj, a: 8, b: 10, c: 10, x: 10}], TDZ{}</code></pre>
+Outer: c function block, this: ..., LE: [{arguments: obj, a: 8, b: <s>8</s> 10, c: 10, x: <s>undefined</s> 10}], TDZ{}</code></pre>
 <h3>Code 2</h3>
             <pre><code>var x = 9;
 function myFunction(){
@@ -107,15 +107,15 @@ x = 5;
 document.write(myFunction()) // 25</code></pre>
 <h3>Lexical Environment Diagram For Code 2</h3>
             <pre><code>1. Global EC creation:
-Outer: null, this: document, LE: [{x: undefined, myFunction: fn}], TDZ{}
+Outer: null, this: Window, LE: [{x: undefined, myFunction: fn}], TDZ{}
 2. Global EC execution:
-Outer: null, this: document, LE: [{x: 9, myFunction: fn}], TDZ{}
+Outer: null, this: Window, LE: [{x: 9, myFunction: fn}], TDZ{}
 3. myFunction FEC creation:
 Outer: global, this: ..., LE: [{arguments: obj}], TDZ{}
 4. myFunction FEC execution:
 Outer: global, this: ..., LE: [{arguments: obj}], TDZ{}
 5. Global EC execution:
-Outer: null, this: document, LE: [{x: 5, myFunction: fn}], TDZ{}
+Outer: null, this: Window, LE: [{x: 5, myFunction: fn}], TDZ{}
 7. myFunction FEC creation:
 Outer: global, this: ..., LE: [{arguments: obj}], TDZ{}
 8. myFunction FEC execution:
@@ -131,9 +131,9 @@ function bar(){
 bar()</code></pre>
 <h3>Lexical Environment Diagram For Code 3</h3>
             <pre><code>1. Global EC creation:
-Outer: null, this: document, LE: [{foo: undefined, bar: fn}], TDZ{}
+Outer: null, this: Window, LE: [{foo: undefined, bar: fn}], TDZ{}
 2. Global EC execution:
-Outer: null, this: document, LE: [{foo: 1, bar: fn}], TDZ{}
+Outer: null, this: Window, LE: [{foo: 1, bar: fn}], TDZ{}
 3. bar FEC creation:
 Outer: global, this: ..., LE: [{arguments: obj, foo: undefined}], TDZ{}
 4. myFunction FEC execution:

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab5</title>
+    <link href="../Lab3/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>💻 Lab 5: Call Context</h1>
+    </header>
+
+    <main>
+        <section class="question">
+            <h2>Problem 1: What will be printed?</h2>
+            <a href="./prob1.js">Here is source code</a>
+            <h3>Code 1</h3>
+
+            <pre><code>let str = "Greetings, ";
+let user = {
+    firstName: "John",
+    lastname: "Smith",
+    display: function () {
+        console.log(str, this.firstName);
+        show("hi");
+    },
+};
+user.display();
+function show(msg) {
+    console.log(msg + " " + this.lastname);
+}
+show.call(user, "hello");</code></pre>
+            <h3>Output Code1</h3>
+            <pre><code>Greetings, John
+hi undefined
+hello Smith</code></pre>
+            <h3>Lexical Environment Diagram For Code 1</h3>
+            <pre><code>1. Global EC creation:
+Outer: null, this: Window, LE: [{show: fn}], TDZ{str, user}
+2. Global EC execution:
+Outer: null, this: Window, LE: [{show: fn, str: "Greetings, ", user: obj}], TDZ{}
+3. display FEC creation:
+Outer: global, this: user, LE: [{arguments: obj}], TDZ{}
+4. display FEC execution:
+Outer: global, this: user, LE: [{arguments: obj}], TDZ{}
+5. show FEC creation:
+Outer: global, this: Window, LE: [{arguments: obj, msg: "hi"}], TDZ{}
+6. show FEC execution:
+Outer: global, this: Window, LE: [{arguments: obj, msg: "hi"}], TDZ{}
+7. show FEC creation:
+Outer: global, this: user, LE: [{arguments: obj, msg: "hello"}], TDZ{}
+8. show FEC execution:
+Outer: global, this: user, LE: [{arguments: obj, msg: "hello"}], TDZ{}
+</code></pre>
+        </section>
+
+
+        <section class="question">
+            <h2>Problem 2: Fix using wrapper, bind, call, or apply.</h2>
+            <a href="./prob2.js">Here is source code</a>
+            <br>
+            <a href="./test_prob2.html">Here to Test</a>
+            <h3>Original Code</h3>
+
+            <pre><code>"use strict";
+
+function askPassword(ok, fail) {
+    let password = prompt("Password?", "");
+    if (password == "rockstar") ok();
+    else fail();
+}
+
+let user = {
+    name: "John",
+    loginOk() {
+        alert(`${this.name} logged in`);
+    },
+    loginFail() {
+        alert(`${this.name} failed to log in`);
+    },
+};
+
+askPassword(user.loginOk, user.loginFail);</code></pre>
+            <h3>Fixed Code</h3>
+            <pre><code>"use strict";
+
+function askPassword(ok, fail) {
+    let password = prompt("Password?", "");
+    if (password == "rockstar") ok();
+    else fail();
+}
+
+let user = {
+    name: "John",
+    loginOk() {
+        alert(`${this.name} logged in`);
+    },
+    loginFail() {
+        alert(`${this.name} failed to log in`);
+    },
+};
+
+askPassword(user.loginOk.bind(user), user.loginFail.bind(user));</code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Problem 3: Fix using wrapper, bind, call, or apply.</h2>
+            <a href="./prob3.js">Here is source code</a>
+            <h3>Original Code</h3>
+
+            <pre><code>"use strict";
+let group = {
+    title: "Our Group",
+    students: ["John", "Pete", "Alice"],
+    showList: function () {
+        this.students.forEach(function (student) {
+            console.log(this.title + ": " + student);
+        });
+    },
+};
+group.showList();</code></pre>
+            <h3>Fixed Code</h3>
+            <pre><code>"use strict";
+let group = {
+    title: "Our Group",
+    students: ["John", "Pete", "Alice"],
+    showList: function () {
+        this.students.forEach(function (student) {
+            console.log(this.title + ": " + student);
+        }.bind(this));
+    },
+};
+group.showList();</code></pre>
+        </section>
+        <a href="https://validator.w3.org/check?url=https://chhunneng.github.io/CS472/Lab5/index.html"><img
+                src="../imgs/w3c-html5-logo.png" class="validator" alt="W3C HTML5 Logo"></a>
+        <a href="https://jigsaw.w3.org/css-validator/validator?uri=https://chhunneng.github.io/CS472/Lab5/index.html"><img
+                src="../imgs/w3c-css-logo.png" class="validator" alt="W3C CSS Logo"></a>
+    </main>
+</body>
+
+</html>
