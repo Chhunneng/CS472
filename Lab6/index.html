@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab6</title>
+    <link href="../Lab3/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>💻 Lab 6</h1>
+    </header>
+    <main>
+        <section class="question">
+            <h2>Question 1: Object Literal</h2>
+            <h3>Question</h3>
+            <pre><code>Create an object student using object literal which has:
+properties: firstName, lastName, grades: Array
+Methods:
+• inputNewGrade(newGrade) : push newGrade to grades.
+• computeAverageGrade(): return the average of grades.
+Create an Array with multiple students which are created using Object.create();
+Compute the average grade for all students in the array</code></pre>
+            <h3>Code Solution</h3>
+            <pre><code>const student = {
+    firstName: "",
+    lastName: "",
+    grades: [],
+
+    inputNewGrade(newGrade) {
+        this.grades.push(newGrade);
+    },
+
+    computeAverageGrade() {
+        if (this.grades.length === 0) return 0;
+        return this.grades.reduce((a, b) => a + b, 0) / this.grades.length;
+    },
+};
+
+const std1 = Object.create(student);
+std1.firstName = "Bao";
+std1.lastName = "Thai";
+std1.grades = [85, 90];
+std1.inputNewGrade(78)
+
+const std2 = Object.create(student);
+std2.firstName = "Bai";
+std2.lastName = "Thao";
+std2.grades = [92, 88, 84];
+
+const students = [std1, std2];
+
+console.log(
+    "Average all student:",
+    students.reduce((sum, stu) => {
+        return sum + stu.computeAverageGrade();
+    }, 0) / students.length
+);</code></pre>
+            <h3>Prototypal Inheritance Diagram</h3>
+            <img src="../imgs/lab6_prob1.png" alt="Diagram">
+        </section>
+
+        <section class="question">
+            <h2>Question 2: Constructor function</h2>
+            <h3>Question</h3>
+            <pre><code>Redo the Question1 using Constructor function</code></pre>
+            <h3>Code Solution</h3>
+            <pre><code>function Student(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.grades = [];
+}
+
+Student.prototype.inputNewGrade = function (newGrade) {
+    this.grades.push(newGrade);
+};
+
+Student.prototype.computeAverageGrade = function () {
+    if (this.grades.length === 0) return 0;
+    return this.grades.reduce((a, b) => a + b, 0) / this.grades.length;
+};
+
+const std1 = new Student("Bao", "Thai");
+std1.inputNewGrade(85);
+std1.inputNewGrade(90);
+std1.inputNewGrade(78);
+
+const std2 = new Student("Bai", "Thao");
+std2.inputNewGrade(92);
+std2.inputNewGrade(88);
+std2.inputNewGrade(84);
+
+const students = [std1, std2];
+
+console.log(
+    "Average all student:",
+    students.reduce((sum, stu) => {
+        return sum + stu.computeAverageGrade();
+    }, 0) / students.length
+);</code></pre>
+            <h3>Prototypal Inheritance Diagram</h3>
+            <img src="../imgs/lab6_prob2.png" alt="Diagram">
+        </section>
+
+        <section class="question">
+            <h2>Question 3</h2>
+            <h3>Question</h3>
+            <pre><code>1. Convert the given diagram to JavaScript’s Prototypal Inheritance diagram and
+2. Implement the code using the constructor function.
+Animal: run method will increase the animal speed.
+Rabbit: hide method will just print out rabbit name with “hides” string. </code></pre>
+            <h3>Prototypal Inheritance Diagram</h3>
+            <img src="../imgs/lab6_prob3.png" alt="Diagram">
+            <h3>Code Solution Using The Constructor Function</h3>
+            <pre><code>function Animal(name, speed) {
+    this.name = name;
+    this.speed = speed;
+}
+Animal.prototype.run = function (increase) {
+    this.speed += increase;
+};
+Animal.compareBySpeed = function (a1, a2) {
+    return a2.speed - a1.speed;
+};
+function Rabbit(name, speed) {
+    Animal.call(this, name, speed);
+}
+Rabbit.prototype.hide = function () {
+    console.log(`${this.name} hides`);
+};
+Object.setPrototypeOf(Rabbit.prototype, Animal.prototype);
+Object.setPrototypeOf(Rabbit, Animal)
+
+
+const rabbit1 = new Rabbit("Ok", 20);
+rabbit1.run(5);
+rabbit1.hide();</code></pre>
+
+        </section>
+        <a href="https://validator.w3.org/check?url=https://chhunneng.github.io/CS472/Lab6/index.html"><img
+                src="../imgs/w3c-html5-logo.png" class="validator" alt="W3C HTML5 Logo"></a>
+        <a href="https://jigsaw.w3.org/css-validator/validator?uri=https://chhunneng.github.io/CS472/Lab6/index.html"><img
+                src="../imgs/w3c-css-logo.png" class="validator" alt="W3C CSS Logo"></a>
+    </main>
+</body>
+
+</html>
