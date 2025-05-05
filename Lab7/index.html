@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab7</title>
+    <link href="../Lab3/index.css" rel="stylesheet">
+    <script src="./prob2.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>💻 Lab 7</h1>
+    </header>
+    <main>
+        <section class="question">
+            <h2>Question 1: Object Literal</h2>
+            <h3>Question</h3>
+            <pre><code>This is a quiz system which allows students to take quizzes, get each student's quiz score and
+compute average score of students.
+Use constructor function to implement Student, Question and Quiz</code></pre>
+            <h3>Code Solution</h3>
+            <pre><code>function Student(studentId) {
+    this.studentId = studentId;
+    this.answers = [];
+}
+Student.prototype.addAnswer = function (question) {
+    this.answers.push(question);
+};
+
+function Question(qid, answer) {
+    this.qid = qid;
+    this.answer = answer;
+}
+
+Question.prototype.checkAnswer = function (answer) {
+    return answer === this.answer;
+};
+
+function Quiz(questions, students) {
+    this.questions = new Map();
+    for (const q of questions) {
+        this.questions.set(q.qid, q.answer);
+    }
+    this.students = students;
+}
+
+Quiz.prototype.scoreStudentBySid = function (sid) {
+    const std = this.students.find((s) => s.studentId === sid);
+    let score = 0;
+    if (std) {
+        for (const stdAns of std.answers) {
+            if (stdAns.checkAnswer(this.questions.get(stdAns.qid))) {
+                score++;
+            }
+        }
+        return score;
+    }
+    console.log("no student with ID:", sid);
+    return 0;
+};
+
+Quiz.prototype.getAverageScore = function () {
+    if (this.students.length === 0) return 0;
+    return (
+        this.students.reduce(
+            (total, std) => total + this.scoreStudentBySid(std.studentId),
+            0
+        ) / this.students.length
+    );
+};
+
+const student1 = new Student(10);
+student1.addAnswer(new Question(2, "a"));
+student1.addAnswer(new Question(3, "b"));
+student1.addAnswer(new Question(1, "b"));
+const student2 = new Student(11);
+student2.addAnswer(new Question(3, "b"));
+student2.addAnswer(new Question(2, "a"));
+student2.addAnswer(new Question(1, "d"));
+const students = [student1, student2];
+const questions = [
+    new Question(1, "b"),
+    new Question(2, "a"),
+    new Question(3, "b"),
+];
+const quiz = new Quiz(questions, students);
+let scoreforStudent10 = quiz.scoreStudentBySid(10);
+console.log(scoreforStudent10); //Expected Result: 3
+let scoreforStudent11 = quiz.scoreStudentBySid(11);
+console.log(scoreforStudent11); //Expected Result: 2
+let average = quiz.getAverageScore();
+console.log(average); //Expected Reuslt: 2.5
+            </code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Question 2: Constructor function</h2>
+            <h3>Question</h3>
+            <pre><code>Redo Question 1 using the class syntax and draw the prototypal inheritance
+diagram based on an implementation of the class syntax. </code></pre>
+            <h3>Code Solution</h3>
+            <pre><code>class Student {
+    constructor(studentId) {
+        this.studentId = studentId;
+        this.answers = [];
+    }
+
+    addAnswer(question) {
+        this.answers.push(question);
+    }
+}
+
+class Question {
+    constructor(qid, answer) {
+        this.qid = qid;
+        this.answer = answer;
+    }
+    checkAnswer(answer) {
+        return answer === this.answer;
+    }
+}
+
+class Quiz {
+    constructor(questions, students) {
+        this.questions = new Map();
+        for (const q of questions) {
+            this.questions.set(q.qid, q.answer);
+        }
+        this.students = students;
+    }
+
+    scoreStudentBySid(sid) {
+        const std = this.students.find((s) => s.studentId === sid);
+        let score = 0;
+        if (std) {
+            for (const stdAns of std.answers) {
+                if (stdAns.checkAnswer(this.questions.get(stdAns.qid))) {
+                    score++;
+                }
+            }
+            return score;
+        }
+        console.log("no student with ID:", sid);
+        return 0;
+    }
+
+    getAverageScore() {
+        if (this.students.length === 0) return 0;
+        return (
+            this.students.reduce(
+                (total, std) => total + this.scoreStudentBySid(std.studentId),
+                0
+            ) / this.students.length
+        );
+    }
+}
+
+const student1 = new Student(10);
+student1.addAnswer(new Question(2, "a"));
+student1.addAnswer(new Question(3, "b"));
+student1.addAnswer(new Question(1, "b"));
+const student2 = new Student(11);
+student2.addAnswer(new Question(3, "b"));
+student2.addAnswer(new Question(2, "a"));
+student2.addAnswer(new Question(1, "d"));
+console.log(student2)
+const students = [student1, student2];
+const questions = [
+    new Question(1, "b"),
+    new Question(2, "a"),
+    new Question(3, "b"),
+];
+const quiz = new Quiz(questions, students);
+let scoreforStudent10 = quiz.scoreStudentBySid(10);
+console.log(scoreforStudent10); //Expected Result: 3
+let scoreforStudent11 = quiz.scoreStudentBySid(11);
+console.log(scoreforStudent11); //Expected Result: 2
+let average = quiz.getAverageScore();
+console.log(average); //Expected Reuslt: 2.5</code></pre>
+            <h3>Prototypal Inheritance Diagram</h3>
+            <img src="../imgs/lab7_prob2.png" alt="Diagram">
+        </section>
+
+        <section class="question">
+            <h2>Question 3</h2>
+            <h3>Question</h3>
+            <pre><code>Complete the following class and test it with dummy data:</code></pre>
+            <h3>Code Solution</h3>
+            <pre><code>class Exercise3 {
+    #movies = new Map();
+
+    // Adds a new genre if it does not exist
+    add_genre(genre) {
+        if (!this.#movies.has(genre)) {
+            this.#movies.set(genre, []);
+            return true;
+        }
+        return false;
+    }
+
+    // Adds a movie to a specific genre if movie ID does not already exist in that genre
+    add_movie_in_genre(genre, new_movie) {
+        if (!this.#movies.has(genre)) return false;
+
+        const movies = this.#movies.get(genre);
+        const exists = movies.some((movie) => movie.id === new_movie.id);
+        if (!exists) {
+            movies.push(new_movie);
+            return true;
+        }
+        return false;
+    }
+
+    // Updates a movie's title by genre and movie ID
+    update_movie_title_by_genre_and_movie_id(genre, movie_id, new_title) {
+        if (!this.#movies.has(genre)) return false;
+
+        const movies = this.#movies.get(genre);
+        const movie = movies.find((movie) => movie.id === movie_id);
+        if (movie) {
+            movie.title = new_title;
+            return true;
+        }
+        return false;
+    }
+
+    // Deletes a movie by genre and movie ID
+    delete_movie_by_genre_and_movie_id(genre, movie_id) {
+        if (!this.#movies.has(genre)) return false;
+
+        const movies = this.#movies.get(genre);
+        const index = movies.findIndex((movie) => movie.id === movie_id);
+        if (index !== -1) {
+            movies.splice(index, 1);
+            return true;
+        }
+        return false;
+    }
+
+    // Gets the title of a movie by genre and movie ID
+    get_movie_title_by_id(genre, movie_id) {
+        if (!this.#movies.has(genre)) return "";
+
+        const movies = this.#movies.get(genre);
+        const movie = movies.find((movie) => movie.id === movie_id);
+        return movie ? movie.title : "";
+    }
+}
+
+// Dummy test data
+const ex3 = new Exercise3();
+
+console.log(ex3.add_genre("thriller")); // true
+console.log(ex3.add_genre("thriller")); // false
+
+console.log(
+    ex3.add_movie_in_genre("thriller", { id: "1", title: "The American" })
+); // true
+console.log(ex3.add_movie_in_genre("thriller", { id: "2", title: "Arcadian" })); // true
+console.log(
+    ex3.add_movie_in_genre("thriller", { id: "1", title: "Duplicated ID" })
+); // false
+
+console.log(ex3.get_movie_title_by_id("thriller", "1")); // "The American"
+
+console.log(
+    ex3.update_movie_title_by_genre_and_movie_id(
+        "thriller",
+        "2",
+        "Arcadian Updated"
+    )
+); // true
+console.log(ex3.get_movie_title_by_id("thriller", "2")); // "Arcadian Updated"
+
+console.log(ex3.delete_movie_by_genre_and_movie_id("thriller", "1")); // true
+console.log(ex3.get_movie_title_by_id("thriller", "1")); // ""</code></pre>
+
+        </section>
+        <a href="https://validator.w3.org/check?url=https://chhunneng.github.io/CS472/Lab7/index.html"><img
+                src="../imgs/w3c-html5-logo.png" class="validator" alt="W3C HTML5 Logo"></a>
+        <a href="https://jigsaw.w3.org/css-validator/validator?uri=https://chhunneng.github.io/CS472/Lab7/index.html"><img
+                src="../imgs/w3c-css-logo.png" class="validator" alt="W3C CSS Logo"></a>
+    </main>
+</body>
+
+</html>
