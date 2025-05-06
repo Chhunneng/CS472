@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab8</title>
+    <link href="../Lab3/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>💻 Lab 8</h1>
+    </header>
+    <main>
+        <section class="question">
+            <h2>Question 1</h2>
+            <h3>Question: Implement the code for Meditation class to be used as follows:</h3>
+            <pre><code>const morning_meditation = new Meditation(5);
+morning_meditation.start();
+console.log(`Start meditation`);
+// Start meditation
+// 5
+// 4
+// 3
+// 2
+// 1
+// Jay Guru Dev</code></pre>
+            <h3>Code Solution</h3>
+            <pre><code>class Meditation{
+    constructor(count){
+        this.count = count;
+    }
+    start(){
+        if(this.count === 0){
+            console.log("Jay Guru Dev")
+        }
+        else{
+            setTimeout(console.log, 0, this.count--);
+            setTimeout(this.start.bind(this), 1000);
+        }
+    }
+}
+const morning_meditation = new Meditation(5);
+morning_meditation.start();
+console.log(`Start meditation`);</code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Question 2</h2>
+            <h3>Question</h3>
+            <pre><code>Change isPrime function below to run asynchronously using Promise.
+• if the input is prime number, the promise resolves with { prime: true }.
+• if the input is not a prime number, it rejects with { prime: false }.
+const isPrime = (n: number) => {
+ for (let i = 2, s = Math.sqrt(n); i &lt;= s; i++)
+ if (n % i === 0) return false;
+ return n > 1;
+};
+When you finish, test using the code below:
+console.log('start');
+isPrime(7)
+ .then(console.log)
+ .catch(console.error);
+console.log('end');
+// start
+// end
+// { prime: true }
+Make changes to provided test and use async/await instead of .then() and .catch()</code></pre>
+            <h3>Code Solution</h3>
+            <pre><code>const isPrime = (n) => {
+    return new Promise((resolve, reject) => {
+        for (let i = 2, s = Math.sqrt(n); i &lt;= s; i++)
+            if (n % i === 0) return reject({ prime: false });
+        return n > 1 ? resolve({ prime: true }) : reject({ prime: false });
+    });
+};
+
+console.log("start");
+(async () => {
+    try {
+        console.log(await isPrime(7));
+    } catch (err) {
+        console.error(err);
+    }
+})();
+console.log("end");
+</code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Question 3</h2>
+            <h3>Question</h3>
+            <pre><code>Write an IIFE that fetch recipes from https://dummyjson.com/recipes and print to the console a list
+of recipe names.</code></pre>
+            <h3>Code Solution</h3>
+            <pre><code>(async () => {
+    const res = await fetch("https://dummyjson.com/recipes");
+    if (res.ok) {
+        const data = await res.json();
+        console.log(data.recipes.map((recipe) => recipe.name));
+    }
+})();
+</code></pre>
+
+        </section>
+        <a href="https://validator.w3.org/check?url=https://chhunneng.github.io/CS472/Lab8/index.html"><img
+                src="../imgs/w3c-html5-logo.png" class="validator" alt="W3C HTML5 Logo"></a>
+        <a href="https://jigsaw.w3.org/css-validator/validator?uri=https://chhunneng.github.io/CS472/Lab8/index.html"><img
+                src="../imgs/w3c-css-logo.png" class="validator" alt="W3C CSS Logo"></a>
+    </main>
+</body>
+
+</html>
