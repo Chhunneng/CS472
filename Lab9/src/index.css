@@ -57,3 +57,11 @@ button:disabled {
   background-color: #b0d4d9;
   cursor: not-allowed;
 }
+
+a {
+  color: #05445e;
+}
+
+a:hover {
+  color: #189ab4;
+}
