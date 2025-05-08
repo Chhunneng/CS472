@@ -1,228 +1,256 @@
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: 1rem;
-  text-align: left;
-  background-color: #ffffff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(5, 68, 94, 0.1);
-}
-
-th, td {
-  padding: 1rem;
-  border: 1px solid #189ab4;
-}
-
-th {
-  background-color: #189ab4;
-  color: #ffffff;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-tr:nth-child(even) {
-  background-color: #f0fbfd;
-}
-
-tr:hover {
-  background-color: #d4f1f4;
-  transition: background-color 0.3s ease;
-}
-
 button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #189ab4;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-  background-color: #107a8b;
-  transform: scale(1.05);
+    background-color: #107a8b;
+    transform: scale(1.05);
 }
 
 button:active {
-  background-color: #0e6a7a;
-  transform: scale(1);
+    background-color: #0e6a7a;
+    transform: scale(1);
 }
 
 button:disabled {
-  background-color: #b0d4d9;
-  cursor: not-allowed;
+    background-color: #b0d4d9;
+    cursor: not-allowed;
 }
 
 a {
-  color: #05445e;
+    color: #05445e;
 }
 
 a:hover {
-  color: #189ab4;
+    color: #189ab4;
 }
 
-
 form {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(5, 68, 94, 0.1);
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(5, 68, 94, 0.1);
 }
 
 form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #05445e;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #05445e;
 }
 
 form input,
 form textarea,
 form select {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  border: 1px solid #189ab4;
-  border-radius: 4px;
-  background-color: #f0fbfd;
-  color: #05445e;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border: 1px solid #189ab4;
+    border-radius: 4px;
+    background-color: #f0fbfd;
+    color: #05445e;
+    box-sizing: border-box;
 }
 
 form input:focus,
 form textarea:focus,
 form select:focus {
-  outline: none;
-  border-color: #107a8b;
-  box-shadow: 0 0 4px rgba(16, 122, 139, 0.5);
+    outline: none;
+    border-color: #107a8b;
+    box-shadow: 0 0 4px rgba(16, 122, 139, 0.5);
 }
 
 form textarea {
-  resize: vertical;
-  min-height: 100px;
+    resize: vertical;
+    min-height: 100px;
 }
 
 form button {
-  width: 100%;
+    width: 100%;
 }
 
 form .form-group {
-  margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 form .error-message {
-  color: #d9534f;
-  font-size: 0.875rem;
-  margin-top: -0.5rem;
-  margin-bottom: 1rem;
+    color: #d9534f;
+    font-size: 0.875rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
 }
 
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
 .modal-content {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 4px 6px rgba(5, 68, 94, 0.1);
-  animation: fadeIn 0.3s ease-in-out;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 6px rgba(5, 68, 94, 0.1);
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .modal-content h2 {
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  text-align: center;
-  color: #05445e;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #05445e;
 }
 
 .modal-content form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .modal-content label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #05445e;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #05445e;
 }
 
 .modal-content input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #189ab4;
-  border-radius: 4px;
-  font-size: 1rem;
-  background-color: #f0fbfd;
-  color: #05445e;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #189ab4;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #f0fbfd;
+    color: #05445e;
 }
 
 .modal-content input:focus {
-  border-color: #107a8b;
-  outline: none;
-  box-shadow: 0 0 4px rgba(16, 122, 139, 0.5);
+    border-color: #107a8b;
+    outline: none;
+    box-shadow: 0 0 4px rgba(16, 122, 139, 0.5);
 }
 
 .error-message {
-  color: #d9534f;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
+    color: #d9534f;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
 }
 
 .modal-content button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .modal-content button[type="submit"] {
-  background-color: #189ab4;
-  color: #ffffff;
+    background-color: #189ab4;
+    color: #ffffff;
 }
 
 .modal-content button[type="submit"]:hover {
-  background-color: #107a8b;
+    background-color: #107a8b;
 }
 
 .modal-content button[type="button"] {
-  background-color: #b0d4d9;
-  color: #05445e;
+    background-color: #b0d4d9;
+    color: #05445e;
 }
 
 .modal-content button[type="button"]:hover {
-  background-color: #a0c4c9;
+    background-color: #a0c4c9;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.book-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(5, 68, 94, 0.1);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book-card h3 {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    color: #05445e;
+}
+
+.book-card p {
+    margin: 0.5rem 0;
+    color: #05445e;
+}
+
+.book-card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.edit-button {
+    background-color: #189ab4;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-button:hover {
+    background-color: #107a8b;
+}
+
+.delete-button {
+    background-color: #d9534f;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-button:hover {
+    background-color: #c9302c;
 }
