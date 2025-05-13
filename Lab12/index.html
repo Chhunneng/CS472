@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab12</title>
+    <link href="../Lab3/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>💻 Lab 12</h1>
+    </header>
+    <main>
+        <section class="question">
+            <h2>1. Pls answer the following: </h2>
+            <h3>1: What is LibUV?</h3>
+            <pre>LibUV is a multi-platform support library with a focus on asynchronous I/O.</pre>
+            <h3>2. Explain the difference between setImmediate(f) and setTimeout(f, Time)?</h3>
+            <pre>setTimeout(f, Time) is schedules a callback to run after a specific time, the functions are registered in the timers phase of the event loop. 
+setImmediate(f) is schedules a callback to run at check phase of the event loop after IO events' callbacks</pre>
+            <h3>3. Explain the difference between process.nextTick(f) and setImmediate(f)?</h3>
+            <pre>process.nextTick(f) runs before the next event loop tick, immediately after the current task.
+setImmediate(f) runs in the check phase, after I/O events, on the next loop iteration.</pre>
+        </section>
+
+        <section class="question">
+            <h2>Question 2:</h2>
+            <h3>Pls write down the output without executing the following code snippets and check it with result. </h3>
+            <pre><code>const fs = require("fs");
+
+//you may assume input.txt is in the same folder
+
+const rd = fs.createReadStream("input.txt");
+
+rd.close();
+
+rd.on("close", () => console.log("readablStream close event"));
+
+fs.readFile("input.txt", "utf-8", (error, data) => {
+    if (error) console.log(error);
+    else console.log(data);
+});
+
+setTimeout(() => console.log("this is setTimeout"), 5000);
+
+setTimeout(() => console.log("this is setTimeout"), 0);
+
+setImmediate(() => console.log("this is setImmediate 1"));
+
+setImmediate(() => {
+    console.log("this is setImmediate 2");
+
+    Promise.resolve().then(() =>
+        console.log("Promise.resolve inside setImmediate")
+    );
+});
+
+Promise.resolve().then(() => console.log("Promise.resolve 1"));
+
+Promise.resolve().then(() => {
+    console.log("Promise.resolve 2");
+
+    process.nextTick(() => console.log("nextTick inside Promise"));
+});
+
+process.nextTick(() => console.log("nextTick 1"));</code></pre>
+            <h3>input.txt</h3>
+            <pre>data from input.txt</pre>
+            <h3>Output</h3>
+            <pre>nextTick 1
+Promise.resolve 1
+Promise.resolve 2
+nextTick inside Promise
+this is setTimeout
+this is setImmediate 1
+this is setImmediate 2
+Promise.resolve inside setImmediate
+readablStream close event
+data from input.txt
+this is setTimeout</pre>
+        </section>
+
+        <a href="https://validator.w3.org/check?url=https://chhunneng.github.io/CS472/Lab12/index.html"><img
+                src="../imgs/w3c-html5-logo.png" class="validator" alt="W3C HTML5 Logo"></a>
+        <a href="https://jigsaw.w3.org/css-validator/validator?uri=https://chhunneng.github.io/CS472/Lab12/index.html"><img
+                src="../imgs/w3c-css-logo.png" class="validator" alt="W3C CSS Logo"></a>
+    </main>
+</body>
+
+</html>
