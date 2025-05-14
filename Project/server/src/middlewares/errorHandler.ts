@@ -1,17 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import type { Request, Response, NextFunction } from "express";
 
-export interface AppError extends Error {
-    status?: number;
+export function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  console.error(err.stack);
+
+  res.status(500).json({
+    error: "Internal Server Error",
+    message: process.env.NODE_ENV === "production" ? "Something went wrong" : err.message,
+  });
 }
-
-export const errorHandler = (
-    err: AppError,
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    console.error(err);
-    res.status(err.status || 500).json({
-        message: err.message || "Internal Server Error",
-    });
-};

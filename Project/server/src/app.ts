@@ -1,22 +1,23 @@
-import express, { Request, Response } from 'express';
-import productRoutes from './routes/productRoutes';
-import { errorHandler } from './middlewares/errorHandler';
+import express from "express";
+import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import { swaggerDocs } from "./config/swagger";
+import productRoutes from "./routes/productRoutes";
+import reviewRoutes from "./routes/reviewRoutes";
+import aiRoutes from "./routes/aiRoutes";
+import { errorHandler } from "./middlewares/errorHandler";
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
-// Routes
-app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
-  });
-app.use('/api/products', productRoutes);
-app.get('/', (req: Request, res: Response) => {
-    res.send('OK')
-});
+app.use("/products", productRoutes);
+app.use("/products", reviewRoutes);
+app.use("/ai", aiRoutes);
 
-// Global error handler (should be after routes)
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 app.use(errorHandler);
 
 export default app;
-

@@ -1,36 +1,112 @@
-import { NextFunction, Request, Response } from "express";
-import { Product, products } from "../models/product";
-import { v4 as uuid4 } from "uuid";
+import type { Request, Response, NextFunction } from "express";
+import * as productService from "../services/productService";
 
-const path = require("path");
-const fs = require("fs");
-
-// const productsPath = path.join(__dirname, "data", "products.json");
-
-// const readProducts = () => {
-//     const data = fs.readFileSync(productsPath, "utf8");
-//     return JSON.parse(data);
-// };
-
-export const getProducts = (
+export async function getAllProducts(
     req: Request,
     res: Response,
     next: NextFunction
-) => {
+) {
     try {
+        const page = Number.parseInt(req.query.page as string) || 1;
+        const category = req.query.category as string | undefined;
+
+        const result = await productService.getAllProducts({ page, category });
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function searchProducts(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    try {
+        const query = (req.query.q as string) || "";
+        const products = await productService.searchProducts(query);
         res.json(products);
     } catch (error) {
         next(error);
     }
-};
+}
 
-export const createProduct = (req: Request, res: Response, next: NextFunction) => {
+export async function getProductById(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
     try {
-      const { name, description, category, price, averageRating } = req.body;
-      const newItem: Product = { id: uuid4(),  name, description, category, price, averageRating, dateAdded: new Date()};
-      products.push(newItem);
-      res.status(201).json(newItem);
+        const product = await productService.getProductById(req.params.id);
+
+        if (!product) {
+            res.status(404).json({ error: "Product not found" });
+            return;
+        }
+        res.json(product);
     } catch (error) {
-      next(error);
+        next(error);
     }
-  };
+}
+
+export async function createProduct(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    try {
+        const newProduct = await productService.createProduct({
+            name: req.body.name,
+            description: req.body.description,
+            category: req.body.category,
+            price: req.body.price,
+            imageUrl: req.body.imageUrl,
+            dateAdded: new Date().toISOString(),
+        });
+
+        res.status(201).json(newProduct);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function updateProduct(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    try {
+        const updatedProduct = await productService.updateProduct(
+            req.params.id,
+            req.body
+        );
+
+        if (!updatedProduct) {
+            res.status(404).json({ error: "Product not found" });
+            return;
+        }
+
+        res.json(updatedProduct);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function deleteProduct(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    try {
+        const success = await productService.deleteProduct(req.params.id);
+
+        if (!success) {
+            res.status(404).json({ error: "Product not found" });
+            return;
+        }
+
+        res.json({ message: "Product deleted successfully" });
+    } catch (error) {
+        next(error);
+    }
+}
