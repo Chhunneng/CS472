@@ -6,7 +6,7 @@ const server = http.createServer((req, res) => {
     const { url } = req;
 
     if (url === "/image") {
-        const imagePath = path.join(__dirname, "..", "imgs", "happy_cat.png"); // replace with your actual image path
+        const imagePath = path.join(__dirname, "..", "imgs", "happy_cat.png");
         fs.readFile(imagePath, (err, data) => {
             if (err) {
                 res.writeHead(500, { "Content-Type": "text/plain" });
