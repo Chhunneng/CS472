@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab13</title>
+    <link rel="stylesheet" href="../Lab3/index.css">
+</head>
+
+<body>
+    <header>
+        <h1>💻 Lab 12</h1>
+    </header>
+    <main>
+        <section class="question">
+            <h2>Question1: What will be outputs in ES module and CommonJS module?</h2>
+            <pre><code>import fs from "fs"; // or const fs = require('fs');
+
+process.nextTick(() => console.log("nextTick 1"));
+
+Promise.resolve().then(() => console.log("promise 1"));
+
+setImmediate(() => {
+    console.log("setImmediate 1");
+});
+
+setTimeout(() => console.log("setTimeout 1"), 0);
+
+fs.readFile("./files/input.txt", "utf-8", (err, data) => {
+    if (err) console.log("there is an error. can not read from file");
+    else {
+        console.log(data);
+    }
+});</code></pre>
+            <h3>CommonJS module(reading file has error)</h3>
+            <pre><code>nextTick 1
+promise 1
+setTimeout 1
+there is an error. can not read from file
+setImmediate 1</code></pre>
+            <h3>CommonJS module(reading file has no error)</h3>
+            <pre><code>nextTick 1
+promise 1
+setTimeout 1
+setImmediate 1
+Read from input.txt</code></pre>
+            <h3>ES module</h3>
+            <pre><code>promise 1
+nextTick 1
+setImmediate 1
+setTimeout 1
+there is an error. can not read from file</code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Question 2: Create a web server using http module:</h2>
+            <pre>If the path is ‘/image’ and method is GET, send a response of an image to any client. Set an appropriate content-type for your image.
+If the path is ‘/pdf’ and method is GET, send a response of a pdf file to any client. Set a Content-type as "application/pdf".
+If the path is ‘/about’ and method is GET, send a response of a txt file to any client. Set a Content-type as "text/plain".
+If the path is ‘/home’ or ‘/’ and method is GET, send “Welcome to my website” text.
+Otherwise return not found with status code 404.</pre>
+            <h3>prob2.js</h3>
+            <pre><code>const http = require("http");
+const fs = require("fs");
+const path = require("path");
+
+const server = http.createServer((req, res) => {
+    const { url } = req;
+
+    if (url === "/image") {
+        const imagePath = path.join(__dirname, "..", "imgs", "happy_cat.png"); // replace with your actual image path
+        fs.readFile(imagePath, (err, data) => {
+            if (err) {
+                res.writeHead(500, { "Content-Type": "text/plain" });
+                res.end("Error loading image");
+            } else {
+                res.writeHead(200, { "Content-Type": "image/jpeg" });
+                res.end(data);
+            }
+        });
+    } else if (url === "/pdf") {
+        const pdfPath = path.join(__dirname, "..", "imgs", "document.pdf");
+        fs.readFile(pdfPath, (err, data) => {
+            if (err) {
+                res.writeHead(500, { "Content-Type": "text/plain" });
+                res.end("Error loading PDF");
+            } else {
+                res.writeHead(200, { "Content-Type": "application/pdf" });
+                res.end(data);
+            }
+        });
+    } else if (url === "/about") {
+        const aboutPath = path.join(__dirname, "..", "imgs", "about.txt");
+        fs.readFile(aboutPath, "utf8", (err, data) => {
+            if (err) {
+                res.writeHead(500, { "Content-Type": "text/plain" });
+                res.end("Error loading text file");
+            } else {
+                res.writeHead(200, { "Content-Type": "text/plain" });
+                res.end(data);
+            }
+        });
+    } else if (url === "/" || url === "/home") {
+        res.writeHead(200, { "Content-Type": "text/plain" });
+        res.end("Welcome to my website");
+    } else {
+        res.writeHead(404, { "Content-Type": "text/plain" });
+        res.end("404 Not Found");
+    }
+});
+
+const PORT = 3000;
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+</code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Question3: practice the fs.readFileSync(), fs.readFile(), fspromises.readFile(), and
+                fs.createReadStream() methods. What are the differences?</h2>
+            <pre><code>const fs = require("fs");
+const fspromises = require("fs/promises");
+
+const readFileSync = fs.readFileSync("./files/input.txt", "utf-8");
+console.log("from readFileSync:", readFileSync);
+
+const readFile = fs.readFile("./files/input.txt", "utf-8", (err, data) => {
+    console.log("from readFile:", data);
+});
+console.log(readFile);
+
+const promiseReadFile = fspromises
+    .readFile("./files/input.txt", "utf-8")
+    .then((res) => {
+        console.log("from fspromises.readFile:", res);
+    });
+
+const createReadStream = fs.createReadStream("./files/input.txt", {
+    encoding: "utf-8",
+    highWaterMark: 2, // 2Byte chunk size
+});
+console.log(createReadStream);
+createReadStream.on("data", (chunk) => {
+    console.log("from createReadStream", chunk);
+});
+createReadStream.on("end", () => {
+    console.log("Finished reading file.");
+});
+</code></pre>
+            <table>
+                <caption>Key differences</caption>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Blocking?</th>
+                        <th>Async Style</th>
+                        <th>Use For</th>
+                        <th>Memory Usage</th>
+                        <th>Small File Speed</th>
+                        <th>Good for Large Files?</th>
+                        <th>Complexity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>fs.readFileSync()</code></td>
+                        <td>✅ Yes</td>
+                        <td>❌ None (Sync)</td>
+                        <td>Simple scripts, config files</td>
+                        <td>High</td>
+                        <td>Fast</td>
+                        <td>❌ No</td>
+                        <td>✅ Easiest</td>
+                    </tr>
+                    <tr>
+                        <td><code>fs.readFile()</code></td>
+                        <td>❌ No</td>
+                        <td>✅ Callback</td>
+                        <td>Standard async reads</td>
+                        <td>Medium</td>
+                        <td>Fast</td>
+                        <td>❌ No</td>
+                        <td>⚠️ Moderate</td>
+                    </tr>
+                    <tr>
+                        <td><code>fs.promises.readFile()</code></td>
+                        <td>❌ No</td>
+                        <td>✅ Promise / async/await</td>
+                        <td>Modern async code</td>
+                        <td>Medium</td>
+                        <td>Fast</td>
+                        <td>❌ No</td>
+                        <td>✅ Clean</td>
+                    </tr>
+                    <tr>
+                        <td><code>fs.createReadStream()</code></td>
+                        <td>❌ No</td>
+                        <td>✅ Stream / EventEmitter</td>
+                        <td>Large files (logs, videos)</td>
+                        <td>Low</td>
+                        <td>Slower (setup time)</td>
+                        <td>✅ Yes</td>
+                        <td>⚠️ Most Complex</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <a href="https://validator.w3.org/check?url=https://chhunneng.github.io/CS472/Lab13/index.html"><img
+                src="../imgs/w3c-html5-logo.png" class="validator" alt="W3C HTML5 Logo"></a>
+        <a href="https://jigsaw.w3.org/css-validator/validator?uri=https://chhunneng.github.io/CS472/Lab13/index.html"><img
+                src="../imgs/w3c-css-logo.png" class="validator" alt="W3C CSS Logo"></a>
+    </main>
+</body>
+
+</html>

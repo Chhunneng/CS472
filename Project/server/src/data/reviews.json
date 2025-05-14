@@ -1,0 +1,243 @@
+[
+    {
+      "id": "r1",
+      "productId": "p1",
+      "author": "John Smith",
+      "rating": 5,
+      "comment": "This is the best smartphone I've ever owned! The camera quality is outstanding and the battery lasts all day even with heavy use. Highly recommend!",
+      "date": "2023-05-15T09:30:00.000Z"
+    },
+    {
+      "id": "r2",
+      "productId": "p1",
+      "author": "Sarah Johnson",
+      "rating": 4,
+      "comment": "Great phone overall. The display is beautiful and performance is snappy. Only giving 4 stars because the price is a bit high.",
+      "date": "2023-05-14T14:45:00.000Z"
+    },
+    {
+      "id": "r3",
+      "productId": "p2",
+      "author": "Michael Brown",
+      "rating": 5,
+      "comment": "This laptop is a beast! Handles everything I throw at it from video editing to gaming. The display is gorgeous and the keyboard is comfortable for long typing sessions.",
+      "date": "2023-05-13T11:20:00.000Z"
+    },
+    {
+      "id": "r4",
+      "productId": "p2",
+      "author": "Emily Davis",
+      "rating": 5,
+      "comment": "Perfect for my work as a graphic designer. Fast, reliable, and the screen colors are accurate. Battery life is impressive too!",
+      "date": "2023-05-12T16:15:00.000Z"
+    },
+    {
+      "id": "r5",
+      "productId": "p2",
+      "author": "David Wilson",
+      "rating": 4,
+      "comment": "Excellent laptop for programming. The only downside is that it gets a bit hot under heavy load, but that's expected with this much power.",
+      "date": "2023-05-11T10:30:00.000Z"
+    },
+    {
+      "id": "r6",
+      "productId": "p3",
+      "author": "Jessica Martinez",
+      "rating": 5,
+      "comment": "These headphones have changed my commute! The noise cancellation is incredible - I can barely hear the subway now. Sound quality is excellent too.",
+      "date": "2023-05-10T13:45:00.000Z"
+    },
+    {
+      "id": "r7",
+      "productId": "p3",
+      "author": "Robert Taylor",
+      "rating": 3,
+      "comment": "Good sound quality but they're a bit tight on my head. Battery life is as advertised though, which is nice.",
+      "date": "2023-05-09T15:20:00.000Z"
+    },
+    {
+      "id": "r8",
+      "productId": "p4",
+      "author": "Amanda Thomas",
+      "rating": 4,
+      "comment": "Love this smartwatch! It tracks my workouts accurately and the notifications are handy. Would give 5 stars but the battery could last longer.",
+      "date": "2023-05-08T09:15:00.000Z"
+    },
+    {
+      "id": "r9",
+      "productId": "p5",
+      "author": "Christopher Lee",
+      "rating": 5,
+      "comment": "Took this speaker camping and it was perfect! Loud enough for our group, battery lasted the whole weekend, and it survived a light rain shower.",
+      "date": "2023-05-07T14:30:00.000Z"
+    },
+    {
+      "id": "r10",
+      "productId": "p5",
+      "author": "Melissa Garcia",
+      "rating": 3,
+      "comment": "Sound quality is good for the size, but I expected more bass. It's convenient and portable though.",
+      "date": "2023-05-06T11:45:00.000Z"
+    },
+    {
+      "id": "r11",
+      "productId": "p6",
+      "author": "Daniel Rodriguez",
+      "rating": 5,
+      "comment": "Picture quality is amazing! Setup was easy and the smart features work great. Very happy with this purchase.",
+      "date": "2023-05-05T16:20:00.000Z"
+    },
+    {
+      "id": "r12",
+      "productId": "p6",
+      "author": "Jennifer White",
+      "rating": 4,
+      "comment": "Great TV for the price. The interface is a bit slow sometimes, but the picture quality makes up for it.",
+      "date": "2023-05-04T10:15:00.000Z"
+    },
+    {
+      "id": "r13",
+      "productId": "p7",
+      "author": "Matthew Harris",
+      "rating": 5,
+      "comment": "As a professional photographer, I'm extremely impressed with this camera. The image quality is outstanding and the controls are intuitive.",
+      "date": "2023-05-03T13:30:00.000Z"
+    },
+    {
+      "id": "r14",
+      "productId": "p7",
+      "author": "Olivia Clark",
+      "rating": 4,
+      "comment": "Great camera for an enthusiast like me. Still learning all the features, but the photos I've taken so far are beautiful.",
+      "date": "2023-05-02T15:45:00.000Z"
+    },
+    {
+      "id": "r15",
+      "productId": "p8",
+      "author": "Andrew Lewis",
+      "rating": 5,
+      "comment": "Gaming has never been better! The graphics are mind-blowing and load times are practically non-existent. Worth every penny!",
+      "date": "2023-05-01T11:20:00.000Z"
+    },
+    {
+      "id": "r16",
+      "productId": "p8",
+      "author": "Sophia Walker",
+      "rating": 5,
+      "comment": "Upgraded from the previous generation and the difference is noticeable. Games look and play amazingly well.",
+      "date": "2023-04-30T14:15:00.000Z"
+    },
+    {
+      "id": "r17",
+      "productId": "p8",
+      "author": "James Hall",
+      "rating": 4,
+      "comment": "Great console, but I wish it came with more storage. Had to buy an expansion card almost immediately.",
+      "date": "2023-04-29T09:45:00.000Z"
+    },
+    {
+      "id": "r18",
+      "productId": "p9",
+      "author": "Emma Young",
+      "rating": 4,
+      "comment": "These earbuds are perfect for my runs. They stay in place, the sound is good, and the battery lasts for several workouts.",
+      "date": "2023-04-28T16:30:00.000Z"
+    },
+    {
+      "id": "r19",
+      "productId": "p9",
+      "author": "Ryan Allen",
+      "rating": 4,
+      "comment": "Sound quality is impressive for the size. Noise cancellation works well in most environments. Comfortable for long listening sessions.",
+      "date": "2023-04-27T10:15:00.000Z"
+    },
+    {
+      "id": "r20",
+      "productId": "p10",
+      "author": "Isabella King",
+      "rating": 5,
+      "comment": "This tablet has replaced my laptop for most tasks. It's powerful, the screen is beautiful, and the battery lasts all day.",
+      "date": "2023-04-26T13:45:00.000Z"
+    },
+    {
+      "id": "r21",
+      "productId": "p10",
+      "author": "Noah Wright",
+      "rating": 4,
+      "comment": "Great for media consumption and light productivity. The screen is gorgeous and performance is smooth.",
+      "date": "2023-04-25T15:20:00.000Z"
+    },
+    {
+      "id": "r22",
+      "productId": "p11",
+      "author": "Ava Scott",
+      "rating": 3,
+      "comment": "Works well with most of my smart home devices, but setup was more complicated than expected. The touchscreen is responsive though.",
+      "date": "2023-04-24T11:30:00.000Z"
+    },
+    {
+      "id": "r23",
+      "productId": "p11",
+      "author": "William Green",
+      "rating": 4,
+      "comment": "Has made controlling my smart home much easier. Voice recognition works well and the screen is a nice addition.",
+      "date": "2023-04-23T14:15:00.000Z"
+    },
+    {
+      "id": "r24",
+      "productId": "p12",
+      "author": "Charlotte Adams",
+      "rating": 4,
+      "comment": "Simple but effective fitness tracker. Battery life is great and it tracks my steps and sleep accurately.",
+      "date": "2023-04-22T09:45:00.000Z"
+    },
+    {
+      "id": "r25",
+      "productId": "p13",
+      "author": "Benjamin Baker",
+      "rating": 5,
+      "comment": "Best keyboard I've ever used! The mechanical switches feel amazing and the RGB lighting is customizable and vibrant.",
+      "date": "2023-04-21T16:30:00.000Z"
+    },
+    {
+      "id": "r26",
+      "productId": "p13",
+      "author": "Mia Nelson",
+      "rating": 4,
+      "comment": "Great keyboard for both gaming and typing. A bit loud, but that's expected with mechanical switches.",
+      "date": "2023-04-20T13:15:00.000Z"
+    },
+    {
+      "id": "r27",
+      "productId": "p14",
+      "author": "Elijah Hill",
+      "rating": 4,
+      "comment": "Comfortable mouse that fits my hand well. Battery life is excellent - I've been using it for weeks without needing to recharge.",
+      "date": "2023-04-19T10:45:00.000Z"
+    },
+    {
+      "id": "r28",
+      "productId": "p15",
+      "author": "Amelia Carter",
+      "rating": 5,
+      "comment": "Super fast SSD that has dramatically improved my workflow. Transfers large files in seconds and the build quality feels premium.",
+      "date": "2023-04-18T14:30:00.000Z"
+    },
+    {
+      "id": "r29",
+      "productId": "p15",
+      "author": "Lucas Mitchell",
+      "rating": 4,
+      "comment": "Great portable storage solution. Fast, reliable, and compact enough to carry anywhere.",
+      "date": "2023-04-17T11:15:00.000Z"
+    },
+    {
+      "id": "r30",
+      "productId": "p1",
+      "author": "Harper Phillips",
+      "rating": 4,
+      "comment": "The camera on this phone is incredible! Battery life is good but not great. Overall very satisfied with the purchase.",
+      "date": "2023-04-16T15:45:00.000Z"
+    }
+  ]
+  
