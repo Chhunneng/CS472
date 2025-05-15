@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab13</title>
+    <link rel="stylesheet" href="../Lab3/index.css">
+</head>
+
+<body>
+    <header>
+        <h1>💻 Lab 13: Express</h1>
+    </header>
+    <main>
+        <section class="question">
+            <h2>Exercise 1: convert Lab13 Question2 to the Express application.</h2>
+            <h3>prob1.js</h3>
+            <pre><code>import express from "express";
+import path from "path";
+import url from "url";
+
+const app = express();
+
+const route = express.Router();
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+route.get(["/home", "/"], (req, res, next) => {
+    res.send("Welcome to my website");
+});
+route.get("/pdf", (req, res, next) => {
+    const pdfPath = path.join(__dirname, "assets", "document.pdf");
+    res.sendFile(pdfPath);
+});
+route.get("/image", (req, res, next) => {
+    const imagePath = path.join(__dirname, "assets", "happy_cat.png");
+    res.sendFile(imagePath);
+});
+route.get("/about", (req, res, next) => {
+    const aboutPath = path.join(__dirname, "assets", "about.txt");
+    res.sendFile(aboutPath);
+});
+
+app.use(route);
+
+app.use((req, res, next) => {
+    res.status(404).send("Page not found");
+});
+
+app.listen(3000, () => {
+    console.log("running on port 3000");
+});</code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Exercise 2: Write an Express application to provide a calculator API.</h2>
+            <pre>There should be an API endpoint for each basic math
+operation: addition, subtraction, multiplication, division, and modulus.
+• Each endpoint will receive the input numbers and return a JSON response
+with the results as follows: { results: 0 }. Use the EchoAPI vscode extension or
+Postman to test your API endpoints.
+• The calculator router should be designed with flexibility to receive the input
+numbers as query parameters, parameters, or in the body as JSON or
+urlEncoded format, For example, all these requests will return the same
+results value { results: 5 }:
+o GET /addition/2/3
+o GET /addition/?a=2&b=3
+o POST /addition/ BODY ?a=2&b=3
+o POST /addition/ BODY {a:2,b:3}</pre>
+            <h3>prob2.js</h3>
+            <pre><code>import express from "express";
+
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+function getNumbers(req) {
+  let a = req.params.a || req.query.a || req.body.a;
+  let b = req.params.b || req.query.b || req.body.b;
+
+  a = parseFloat(a);
+  b = parseFloat(b);
+
+  return { a, b };
+}
+
+app.get(["/addition/:a/:b", "/addition"], (req, res) => {
+  const { a, b } = getNumbers(req);
+  res.json({ results: a + b });
+});
+app.post("/addition", (req, res) => {
+  const { a, b } = getNumbers(req);
+  res.json({ results: a + b });
+});
+
+app.get(["/subtraction/:a/:b", "/subtraction"], (req, res) => {
+  const { a, b } = getNumbers(req);
+  res.json({ results: a - b });
+});
+
+app.post("/subtraction", (req, res) => {
+  const { a, b } = getNumbers(req);
+  res.json({ results: a - b });
+});
+
+app.get(["/multiplication/:a/:b", "/multiplication"], (req, res) => {
+  const { a, b } = getNumbers(req);
+  res.json({ results: a * b });
+});
+
+app.post("/multiplication", (req, res) => {
+  const { a, b } = getNumbers(req);
+  res.json({ results: a * b });
+});
+
+app.get(["/division/:a/:b", "/division"], (req, res) => {
+  const { a, b } = getNumbers(req);
+  if (b === 0) return res.status(400).json({ error: "Division by zero" });
+  res.json({ results: a / b });
+});
+
+app.post("/division", (req, res) => {
+  const { a, b } = getNumbers(req);
+  if (b === 0) return res.status(400).json({ error: "Division by zero" });
+  res.json({ results: a / b });
+});
+
+app.get(["/modulus/:a/:b", "/modulus"], (req, res) => {
+  const { a, b } = getNumbers(req);
+  if (b === 0) return res.status(400).json({ error: "Division by zero" });
+  res.json({ results: a % b });
+});
+
+app.post("/modulus", (req, res) => {
+  const { a, b } = getNumbers(req);
+  if (b === 0) return res.status(400).json({ error: "Division by zero" });
+  res.json({ results: a % b });
+});
+
+app.listen(port, () => {
+  console.log(`Calculator API is running at http://localhost:${port}`);
+});</code></pre>
+        </section>
+        <a href="https://validator.w3.org/check?url=https://chhunneng.github.io/CS472/Lab14/index.html"><img
+                src="../imgs/w3c-html5-logo.png" class="validator" alt="W3C HTML5 Logo"></a>
+        <a href="https://jigsaw.w3.org/css-validator/validator?uri=https://chhunneng.github.io/CS472/Lab14/index.html"><img
+                src="../imgs/w3c-css-logo.png" class="validator" alt="W3C CSS Logo"></a>
+    </main>
+</body>
+
+</html>
