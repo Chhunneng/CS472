@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab13</title>
+    <link rel="stylesheet" href="../Lab3/index.css">
+</head>
+
+<body>
+    <header>
+        <h1>💻 Lab 15: Typescript</h1>
+    </header>
+    <main>
+        <section class="question">
+            <h2>Question 01</h2>
+            <pre>Define a TypeScript function that takes an object with the following
+properties: name (string), age (number), and isStudent (boolean). The function should return a
+string describing the person.</pre>
+              <h3>Solution</h3>
+              <pre><code>type Person = {
+  name: string;
+  age: number;
+  isStudent: boolean;
+};
+
+function describePerson(person: Person): string {
+  const studentStatus = person.isStudent ? "a student" : "not a student";
+  return `${person.name} is ${person.age} years old and is ${studentStatus}.`;
+}</code></pre>
+        </section>
+
+        <section class="question">
+            <h2>Question 02</h2>
+            <pre>Create a TypeScript function that takes an array of numbers and returns the second largest number
+within that array.
+<code>// Your function code here
+console.log(secondLargest([20 ,120 ,111 ,215 ,54 ,78])); // Output: 120</code>
+Note: you may NOT use Array.sort().</pre>
+            <h3>Solution</h3>
+            <pre><code>function secondLargest(numbers: number[]): number {
+  let largest = -Infinity;
+  let second = -Infinity;
+
+  for (const num of numbers) {
+    if (num > largest) {
+      second = largest;
+      largest = num;
+    } else if (num > second && num !== largest) {
+      second = num;
+    }
+  }
+
+  return second;
+}
+
+// Example usage
+console.log(secondLargest([20, 120, 111, 215, 54, 78])); // Output: 120</code></pre>
+        </section>
+        <section>
+          <h2>Question 03:</h2>
+          <pre>Create a TypeScript function that takes any number of arguments and returns their sum (use the rest operator).</pre>
+          <h3>Solution</h3>
+          <pre><code>function sumAll(...numbers: number[]): number {
+  let sum = 0;
+  for (const num of numbers) {
+    sum += num;
+  }
+  return sum;
+}
+
+// Example usage:
+console.log(sumAll(1, 2, 3, 4)); // Output: 10
+console.log(sumAll(10, 20));    // Output: 30</code></pre>
+        </section>
+
+        <section>
+          <h2>Question 04:</h2>
+          <pre>Given two arrays:
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+Use the spread operator to concatenate them into a single array.</pre>
+          <h3>Solution</h3>
+          <pre><code>const arr1: number[] = [1, 2, 3];
+const arr2: number[] = [4, 5, 6];
+
+const combined: number[] = [...arr1, ...arr2];
+
+console.log(combined); // Output: [1, 2, 3, 4, 5, 6]</code></pre>
+        </section>
+
+        <section>
+          <h2>Question 05:</h2>
+          <pre>Convert lab07 Class syntax JavaScript code to TypeScript.</pre>
+          <h3>Solution</h3>
+          <pre><code>class Question {
+  qid: number;
+  answer: string;
+
+  constructor(qid: number, answer: string) {
+    this.qid = qid;
+    this.answer = answer;
+  }
+
+  checkAnswer(answer: string | undefined): boolean {
+    return answer === this.answer;
+  }
+}
+
+class Student {
+  studentId: number;
+  answers: Question[];
+
+  constructor(studentId: number) {
+    this.studentId = studentId;
+    this.answers = [];
+  }
+
+  addAnswer(question: Question): void {
+    this.answers.push(question);
+  }
+}
+
+class Quiz {
+  private questions: Map&lt;number, string&gt;;
+  private students: Student[];
+
+  constructor(questions: Question[], students: Student[]) {
+    this.questions = new Map&lt;number, string&gt;();
+    for (const q of questions) {
+      this.questions.set(q.qid, q.answer);
+    }
+    this.students = students;
+  }
+
+  scoreStudentBySid(sid: number): number {
+    const std = this.students.find((s) => s.studentId === sid);
+    let score = 0;
+    if (std) {
+      for (const stdAns of std.answers) {
+        const correctAns = this.questions.get(stdAns.qid);
+        if (stdAns.checkAnswer(correctAns)) {
+          score++;
+        }
+      }
+      return score;
+    }
+    console.log("No student with ID:", sid);
+    return 0;
+  }
+
+  getAverageScore(): number {
+    if (this.students.length === 0) return 0;
+    const totalScore = this.students.reduce(
+      (total, std) => total + this.scoreStudentBySid(std.studentId),
+      0
+    );
+    return totalScore / this.students.length;
+  }
+}
+
+// Usage Example
+const student1 = new Student(10);
+student1.addAnswer(new Question(2, "a"));
+student1.addAnswer(new Question(3, "b"));
+student1.addAnswer(new Question(1, "b"));
+
+const student2 = new Student(11);
+student2.addAnswer(new Question(3, "b"));
+student2.addAnswer(new Question(2, "a"));
+student2.addAnswer(new Question(1, "d"));
+
+const students: Student[] = [student1, student2];
+const questions: Question[] = [
+  new Question(1, "b"),
+  new Question(2, "a"),
+  new Question(3, "b"),
+];
+
+const quiz = new Quiz(questions, students);
+
+let scoreforStudent10 = quiz.scoreStudentBySid(10);
+console.log(scoreforStudent10); // Expected: 3
+
+let scoreforStudent11 = quiz.scoreStudentBySid(11);
+console.log(scoreforStudent11); // Expected: 2
+
+let average = quiz.getAverageScore();
+console.log(average); // Expected: 2.5</code></pre>
+        </section>
+        <a href="https://validator.w3.org/check?url=https://chhunneng.github.io/CS472/Lab15/index.html"><img
+                src="../imgs/w3c-html5-logo.png" class="validator" alt="W3C HTML5 Logo"></a>
+        <a href="https://jigsaw.w3.org/css-validator/validator?uri=https://chhunneng.github.io/CS472/Lab15/index.html"><img
+                src="../imgs/w3c-css-logo.png" class="validator" alt="W3C CSS Logo"></a>
+    </main>
+</body>
+
+</html>
