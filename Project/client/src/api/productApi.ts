@@ -39,3 +39,7 @@ export async function generateDescription(
     features,
   })
 }
+
+export async function getAllCategories(): Promise<string[]> {
+  return get<string[]>('/products/categories')
+}

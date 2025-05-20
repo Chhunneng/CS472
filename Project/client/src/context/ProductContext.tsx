@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import type { Product } from '../types';
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 interface ProductContextType {
   selectedCategory: string | null;
@@ -14,7 +13,7 @@ const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export function ProductProvider({ children }: { children: ReactNode }) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   return (
@@ -33,10 +32,11 @@ export function ProductProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useProduct() {
   const context = useContext(ProductContext);
   if (context === undefined) {
-    throw new Error('useProduct must be used within a ProductProvider');
+    throw new Error("useProduct must be used within a ProductProvider");
   }
   return context;
-} 
+}

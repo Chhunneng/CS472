@@ -110,3 +110,16 @@ export async function deleteProduct(
         next(error);
     }
 }
+
+export async function getAllCategories(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    try {
+        const categories = await productService.getAllCategories();
+        res.json(categories);
+    } catch (error) {
+        next(error);
+    }
+}

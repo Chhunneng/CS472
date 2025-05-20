@@ -1,5 +1,18 @@
 const API_URL = import.meta.env.REACT_APP_API_URL || "http://localhost:3000"
 
+interface ValidationError {
+  code: string;
+  expected: string;
+  received: string;
+  path: string[];
+  message: string;
+}
+
+interface ApiError {
+  error: string;
+  details?: ValidationError[];
+}
+
 export async function get<T>(endpoint: string): Promise<T> {
   const response = await fetch(`${API_URL}${endpoint}`)
 
@@ -10,7 +23,7 @@ export async function get<T>(endpoint: string): Promise<T> {
   return response.json() as Promise<T>
 }
 
-export async function post<T>(endpoint: string, data: any): Promise<T> {
+export async function post<T>(endpoint: string, data: object): Promise<T> {
   const response = await fetch(`${API_URL}${endpoint}`, {
     method: "POST",
     headers: {
@@ -20,13 +33,14 @@ export async function post<T>(endpoint: string, data: any): Promise<T> {
   })
 
   if (!response.ok) {
-    throw new Error(`API error: ${response.statusText}`)
+    const errorData = await response.json() as ApiError;
+    throw errorData;
   }
 
   return response.json() as Promise<T>
 }
 
-export async function put<T>(endpoint: string, data: any): Promise<T> {
+export async function put<T>(endpoint: string, data: object): Promise<T> {
   const response = await fetch(`${API_URL}${endpoint}`, {
     method: "PUT",
     headers: {
@@ -36,7 +50,8 @@ export async function put<T>(endpoint: string, data: any): Promise<T> {
   })
 
   if (!response.ok) {
-    throw new Error(`API error: ${response.statusText}`)
+    const errorData = await response.json() as ApiError;
+    throw errorData;
   }
 
   return response.json() as Promise<T>

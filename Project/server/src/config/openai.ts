@@ -1,6 +1,8 @@
-import OpenAI from "openai"
-
-// OpenAI configuration
+import OpenAI from "openai";
+require('dotenv').config();
+// DeepSeek configuration
+// Using OpenAI SDK with DeepSeek's API endpoint
 export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || "your-api-key", // Replace with your actual API key
-})
+  baseURL: 'https://api.deepseek.com', // DeepSeek API endpoint
+  apiKey: process.env.DEEPSEEK_API_KEY || "your-api-key", // Replace with your DeepSeek API key
+});

@@ -32,7 +32,6 @@ export async function createReview(
             return;
         }
 
-        // Check if product exists
         const product = await productService.getProductById(productId);
         if (!product) {
             res.status(404).json({ error: "Product not found" });

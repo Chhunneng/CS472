@@ -1,5 +1,7 @@
 import {Router} from "express"
 import * as productController from "../controllers/productController"
+import { validate } from "../middleware/validationMiddleware"
+import { productSchema } from "../validations/schemas"
 
 const router = Router()
 
@@ -65,6 +67,24 @@ router.get("/search", productController.searchProducts)
 
 /**
  * @swagger
+ * /products/categories:
+ *   get:
+ *     summary: Get all product categories
+ *     description: Returns a list of all unique product categories
+ *     responses:
+ *       200:
+ *         description: A list of categories
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: string
+ */
+router.get("/categories", productController.getAllCategories)
+
+/**
+ * @swagger
  * /products/{id}:
  *   get:
  *     summary: Get a product by id
@@ -124,7 +144,7 @@ router.get("/:id", productController.getProductById)
  *             schema:
  *               $ref: '#/components/schemas/Product'
  */
-router.post("/", productController.createProduct)
+router.post("/", validate(productSchema), productController.createProduct)
 
 /**
  * @swagger
@@ -166,7 +186,7 @@ router.post("/", productController.createProduct)
  *       404:
  *         description: Product not found
  */
-router.put("/:id", productController.updateProduct)
+router.put("/:id", validate(productSchema), productController.updateProduct)
 
 /**
  * @swagger

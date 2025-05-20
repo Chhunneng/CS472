@@ -24,7 +24,7 @@ export async function initializeDatabase() {
       price REAL NOT NULL,
       imageUrl TEXT,
       dateAdded TEXT NOT NULL,
-      averageRating REAL DEFAULT 0
+      averageRating REAL DEFAULT 5
     );
 
     CREATE TABLE IF NOT EXISTS reviews (
@@ -49,7 +49,7 @@ export async function initializeDatabase() {
 // Helper function to calculate average rating
 export async function calculateAverageRating(productId: string): Promise<number> {
   const result = await db.get(`SELECT AVG(rating) as avgRating FROM reviews WHERE productId = ?`, [productId]);
-  return result.avgRating || 0;
+  return result.avgRating ?? 5;
 }
 
 // Helper function to update product ratings

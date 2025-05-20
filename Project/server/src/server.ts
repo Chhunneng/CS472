@@ -1,7 +1,9 @@
 import app from "./app";
 import { initializeDatabase } from "./config/database";
+require('dotenv').config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
+console.log("zport", PORT)
 
 async function startServer() {
   try {

@@ -27,9 +27,3 @@ export interface PaginatedProducts {
 export interface AIGeneratedDescription {
   description: string
 }
-
-export interface SentimentAnalysis {
-  sentiment: "positive" | "neutral" | "negative"
-  score: number
-  analysis: string
-}

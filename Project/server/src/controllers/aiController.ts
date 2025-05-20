@@ -27,24 +27,3 @@ export async function generateDescription(
         res.status(500).json({ error: "Failed to generate description" });
     }
 }
-
-export async function analyzeSentiment(
-    req: Request,
-    res: Response,
-    next: NextFunction
-) {
-    try {
-        const { review } = req.body;
-
-        if (!review) {
-            res.status(400).json({ error: "Review text is required" });
-            return;
-        }
-
-        const sentiment = await aiService.analyzeSentiment({ review });
-        res.json(sentiment);
-    } catch (error) {
-        console.error("AI Error:", error);
-        res.status(500).json({ error: "Failed to analyze sentiment" });
-    }
-}

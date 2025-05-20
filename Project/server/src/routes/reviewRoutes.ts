@@ -1,5 +1,7 @@
 import express from "express"
 import * as reviewController from "../controllers/reviewController"
+import { validate } from "../middleware/validationMiddleware"
+import { reviewSchema } from "../validations/schemas"
 
 const router = express.Router()
 
@@ -70,7 +72,7 @@ router.get("/:id/reviews", reviewController.getReviews)
  *       404:
  *         description: Product not found
  */
-router.post("/:id/reviews", reviewController.createReview)
+router.post("/:id/reviews", validate(reviewSchema), reviewController.createReview)
 
 /**
  * @swagger
@@ -120,7 +122,7 @@ router.post("/:id/reviews", reviewController.createReview)
  *       404:
  *         description: Review not found
  */
-router.put("/:productId/reviews/:id", reviewController.updateReview)
+router.put("/:productId/reviews/:id", validate(reviewSchema), reviewController.updateReview)
 
 /**
  * @swagger

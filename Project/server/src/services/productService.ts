@@ -50,7 +50,7 @@ export async function getProductById(id: string): Promise<Product | null> {
 
 export async function createProduct(product: Omit<Product, "id" | "averageRating">): Promise<Product> {
   const id = uuidv4()
-  const averageRating = 0
+  const averageRating = 5
 
   await db.run(
     `INSERT INTO products (id, name, description, category, price, imageUrl, dateAdded, averageRating) 
@@ -121,4 +121,9 @@ export async function updateProduct(id: string, product: Partial<Product>): Prom
 export async function deleteProduct(id: string): Promise<boolean> {
   const result = await db.run(`DELETE FROM products WHERE id = ?`, [id])
   return result.changes > 0
+}
+
+export async function getAllCategories(): Promise<string[]> {
+  const categories = await db.all(`SELECT DISTINCT category FROM products ORDER BY category`)
+  return categories.map((cat: { category: string }) => cat.category)
 }

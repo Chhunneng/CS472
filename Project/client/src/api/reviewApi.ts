@@ -1,5 +1,5 @@
 import { get, post, put, del } from "./client"
-import type { Review, SentimentAnalysis } from "../types"
+import type { Review } from "../types"
 
 export async function getReviews(productId: string): Promise<Review[]> {
   return get<Review[]>(`/products/${productId}/reviews`)
@@ -22,15 +22,4 @@ export async function updateReview(
 
 export async function deleteReview(productId: string, reviewId: string): Promise<void> {
   return del(`/products/${productId}/reviews/${reviewId}`)
-}
-
-export async function analyzeSentiment(reviewText: string): Promise<SentimentAnalysis> {
-  // const data = post<SentimentAnalysis>("/ai/analyze-sentiment", { review: reviewText });
-  // console.log("======res from sentiment", data)
-  return Promise.resolve({
-    sentiment: "positive",
-    score: 1,
-    analysis: "good"
-  })
-  // return data;
 }

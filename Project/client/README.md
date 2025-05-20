@@ -1,72 +1,77 @@
-# Product Review & Rating Platform
+# Product Review Platform
 
-A modern web application for browsing products, posting reviews, and rating products.
+A modern web application where users can share and read product reviews. This platform helps people make informed decisions about products by providing authentic user experiences and ratings.
 
-## Features
+## 🌟 Features
 
-- Browse products with pagination
-- Filter products by category
-- Search products by name
-- View product details
-- Add, edit, and delete reviews
-- Rate products from 1-5 stars
-- Responsive design with Tailwind CSS
-- Type-safe with TypeScript
-- State management with React Query
-- Client-side routing with React Router
+- Browse products and their reviews
+- Write and submit your own product reviews
+- Rate products on a scale of 1-5 stars
+- Search for specific products
+- Filter reviews by rating, date, and helpfulness
+- User-friendly interface with modern design
 
-## Tech Stack
+## 🚀 Getting Started
 
-- React 18
-- TypeScript
-- Tailwind CSS
-- React Query
-- React Router v6
-- Vite
+### Prerequisites
 
-## Getting Started
+Before you begin, make sure you have these installed on your computer:
+- Node.js (version 16 or higher)
+- npm (comes with Node.js)
 
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-4. Open [http://localhost:5173](http://localhost:5173) in your browser
+### Installation
 
-## Project Structure
-
-```
-src/
-  ├── api/          # API client and endpoints
-  ├── components/   # Reusable UI components
-  ├── context/      # React Context providers
-  ├── pages/        # Page components
-  ├── types/        # TypeScript type definitions
-  ├── App.tsx       # Main application component
-  └── main.tsx      # Application entry point
+1. Clone the project to your computer
+```bash
+git clone [your-repository-url]
+cd client
 ```
 
-## API Endpoints
+2. Install the required packages
+```bash
+npm install
+```
 
-### Products
-- GET /products - Fetch all products (paginated)
-- GET /products/search - Search products by name
-- GET /products/:id - Get product details
+3. Start the development server
+```bash
+npm run dev
+```
 
-### Reviews
-- GET /products/:id/reviews - Get product reviews
-- POST /products/:id/reviews - Add a review
-- PUT /products/:id/reviews/:id - Update a review
-- DELETE /products/:id/reviews/:id - Delete a review
+4. Open your browser and visit `http://localhost:5173`
 
-## Contributing
+## 🛠️ Built With
 
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request
+- React - A popular JavaScript library for building user interfaces
+- TypeScript - Adds static typing to JavaScript
+- Tailwind CSS - A utility-first CSS framework
+- Vite - Next generation frontend tooling
+- React Query - For efficient data fetching and caching
+- React Router - For handling navigation between pages
+
+## 📝 Available Scripts
+
+- `npm run dev` - Starts the development server
+- `npm run build` - Creates a production-ready build
+- `npm run preview` - Previews the production build locally
+- `npm run lint` - Checks code for potential errors
+
+## 🤝 Contributing
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details
+
+## 👥 Authors
+
+- Chanchhunneng Chrea
+
+## 🙏 Acknowledgments
+
+- Thanks to all contributors who have helped shape this project
+- Special thanks to the open-source community for the amazing tools and libraries

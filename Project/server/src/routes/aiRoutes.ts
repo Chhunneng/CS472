@@ -1,5 +1,7 @@
 import express from "express"
 import * as aiController from "../controllers/aiController"
+import { validate } from "../middleware/validationMiddleware"
+import { aiDescriptionSchema } from "../validations/schemas"
 
 const router = express.Router()
 
@@ -38,41 +40,6 @@ const router = express.Router()
  *                 description:
  *                   type: string
  */
-router.post("/generate-description", aiController.generateDescription)
-
-/**
- * @swagger
- * /ai/analyze-sentiment:
- *   post:
- *     summary: Analyze review sentiment using AI
- *     description: Uses AI to analyze the sentiment of a review
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - review
- *             properties:
- *               review:
- *                 type: string
- *     responses:
- *       200:
- *         description: Sentiment analysis
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 sentiment:
- *                   type: string
- *                   enum: [positive, neutral, negative]
- *                 score:
- *                   type: number
- *                 analysis:
- *                   type: string
- */
-router.post("/analyze-sentiment", aiController.analyzeSentiment)
+router.post("/generate-description", validate(aiDescriptionSchema), aiController.generateDescription)
 
 export default router
