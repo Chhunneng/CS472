@@ -3,7 +3,6 @@ import { initializeDatabase } from "./config/database";
 require('dotenv').config();
 
 const PORT = process.env.PORT;
-console.log("zport", PORT)
 
 async function startServer() {
   try {
@@ -12,6 +11,7 @@ async function startServer() {
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
       console.log(`Swagger documentation available at http://localhost:${PORT}/api-docs`);
+      console.log(`CORS allowed origins: ${process.env.CORS_ALLOWED_ORIGINS}`);
     });
   } catch (error) {
     console.error("Failed to start server:", error);
